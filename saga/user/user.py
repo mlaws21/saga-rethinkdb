@@ -32,8 +32,8 @@ global PROVIDER_CERT, PK_Prov
 
 # User state:
 provider_tokens = []
-uid = None
 state = {}
+state['uid'] = None
 state['keys'] = {}
 state['agents'] = {}
 
@@ -130,7 +130,7 @@ def login(email: str=None, password: str=None):
         token = response.json().get("access_token")
         logger.log("PROVIDER", f"User {email} logged in successfully.")
         provider_tokens.append(token)
-        state["uid"] = email
+        state['uid'] = email
         # Load the keys from disk:
         sk_u, pk_u = sc.load_ed25519_keys("./keys/"+email)
         state['keys']['signing'] = {
@@ -183,6 +183,9 @@ def register_agent(name=None, device=None,
     monitor.start("user:agent_register")
 
     # Assign the aid:
+    if state['uid'] is None:
+        logger.log("USER", "ERROR: Need to register or login before registering an agent.")
+        return
     aid = state['uid'] + ":" + name
 
     # Generate the device info:

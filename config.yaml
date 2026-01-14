@@ -4,7 +4,7 @@ mongo_uri_for_tools: mongodb://129.10.187.52:27017/saga_tools
 ### CA ###
 ca:
   # Endpoint where CA hosts relevant files
-  endpoint: http://129.10.186.246:8000
+  endpoint: http://0.0.0.0:8000
   config:
     COUNTRY_NAME: US
     STATE_NAME: MA
@@ -15,14 +15,14 @@ ca:
 
 ### PROVIDER ###
 provider:
-  endpoint: https://129.10.187.52:5000
+  endpoint: https://127.0.0.1:5000
   config:
     COUNTRY_NAME: US
     STATE_NAME: MA
     LOCALITY_NAME: Boston
     ORG_NAME: provider
-    COMMON_NAME: 129.10.187.52
-    IP: 129.10.187.52
+    COMMON_NAME: 127.0.0.1
+    IP: 127.0.0.1
 
 ### USER ###
 user:

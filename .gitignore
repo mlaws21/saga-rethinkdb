@@ -178,3 +178,7 @@ cython_debug/
 
 .vscode/*
 saga/user/*/*.json
+
+
+packet_captures/
+rethinkdb_data/
