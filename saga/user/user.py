@@ -385,7 +385,7 @@ if __name__ == "__main__":
             elif choice == '2':
                 login()
             elif choice == '3':
-                register_agent()
+                register_agent(None, 'pika', '127.0.0.1', None, 100, [{"pattern":"*", "budget":10}])
             elif choice == '4':
                 print("Exiting...")
                 exit(0)

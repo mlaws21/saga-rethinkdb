@@ -1,6 +1,3 @@
-# MondoDB connection string (for tool-related data)
-mongo_uri_for_tools: mongodb://129.10.187.52:27017/saga_tools
-
 ### CA ###
 ca:
   # Endpoint where CA hosts relevant files

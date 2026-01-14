@@ -692,11 +692,19 @@ class Agent:
             logger.log("ACCESS", f"Access to {r_aid} denied.")
             return
 
+        # Decode string reprisentations back into b64 binary
+        if isinstance(r_agent_material['crt_u'], str):
+            r_agent_material['crt_u'] = base64.b64decode(r_agent_material['crt_u'])
+            r_agent_material['agent_cert'] = base64.b64decode(r_agent_material['agent_cert'])
+            r_agent_material['agent_sig'] = base64.b64decode(r_agent_material['agent_sig'])
+            r_agent_material['pac'] = base64.b64decode(r_agent_material['pac'])
+            r_agent_material['one_time_keys'] = [base64.b64decode(r_agent_material['one_time_keys'][0])]
+            r_agent_material['one_time_key_sigs'] = [base64.b64decode(r_agent_material['one_time_key_sigs'][0])]
         # ========================================================================
         # Perform verification checks for integrity purposes before connecting to 
         # the receiving agent.
         # ========================================================================    
-
+        # TODO MAKE SURE THIS IS CORRECT
         # Verify user certificate:
         r_agent_user_cert_bytes = r_agent_material.get("crt_u", None)
         r_agent_user_cert = sc.bytesToX509Certificate(r_agent_user_cert_bytes)
