@@ -189,6 +189,7 @@ class Agent:
         # Setup the SAGA CA:
         self.CA = get_SAGA_CA()
         # Download provider certificate
+        # TODO: we need to make sure we are verifying the correct provider -- maybe we need to move this downstream
         provider_cert = self.get_provider_cert()
         # Verify the provider certificate:
         self.CA.verify(provider_cert) # if the verification fails an exception will be raised.
@@ -244,6 +245,7 @@ class Agent:
         Returns:
             cert (Certificate): The provider's certificate as a cryptography.x509.Certificate object.
         """
+        # TODO we need to know which provider we want to access
         provider_url = saga.config.PROVIDER_CONFIG['endpoint']
         response = requests.get(provider_url+"/certificate", verify=saga.config.CA_CERT_PATH, cert=(
             self.workdir+"agent.crt", self.workdir+"agent.key"
@@ -264,6 +266,7 @@ class Agent:
             data (dict): The data returned by the provider, which contains the target agent's information.
             If the access is denied, it returns None.
         """
+        # TODO: extract the uid from the aid so we know which provider to go to
         response = requests.post(f"{saga.config.PROVIDER_CONFIG['endpoint']}/lookup", json={'t_aid': t_aid}, verify=saga.config.CA_CERT_PATH, cert=(
             self.workdir+"agent.crt", self.workdir+"agent.key"
         )) 
@@ -279,6 +282,7 @@ class Agent:
         
     def access(self, t_aid):
         # TODO: How is this different from lookup()?
+        # TODO: extract the uid from the aid so we know which provider to go to
         response = requests.post(f"{saga.config.PROVIDER_CONFIG['endpoint']}/access", json={'i_aid':self.aid, 't_aid': t_aid}, verify=saga.config.CA_CERT_PATH, cert=(
             self.workdir+"agent.crt", self.workdir+"agent.key"
         )) 

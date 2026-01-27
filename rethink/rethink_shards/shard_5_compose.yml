@@ -1,0 +1,48 @@
+services:
+  rethink5_1:
+    image: rethinkdb:latest
+    container_name: rethink5_1
+    command: >
+      rethinkdb --bind all
+      --directory /data/node1
+    volumes:
+      - ../rethinkdb_shard_data/shard_5:/data
+    ports:
+      - "60515:28015"
+      - "60580:8080"
+    networks:
+      rnet_5:
+        ipv4_address: 172.30.5.11
+
+  rethink5_2:
+    image: rethinkdb:latest
+    container_name: rethink5_2
+    command: rethinkdb --bind all --directory /data/node2 --join rethink5_1:29015
+    volumes:
+      - ../rethinkdb_shard_data/shard_5:/data
+    networks:
+      rnet_5:
+        ipv4_address: 172.30.5.12
+    depends_on:
+      - rethink5_1
+
+  rethink5_3:
+    image: rethinkdb:latest
+    container_name: rethink5_3
+    command: rethinkdb --bind all --directory /data/node3 --join rethink5_1:29015
+    volumes:
+      - ../rethinkdb_shard_data/shard_5:/data
+    networks:
+      rnet_5:
+        ipv4_address: 172.30.5.13
+    depends_on:
+      - rethink5_1
+
+networks:
+  rnet_5:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: "rb_5"
+    ipam:
+      config:
+        - subnet: 172.30.5.0/24

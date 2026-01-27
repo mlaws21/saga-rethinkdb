@@ -1,87 +1,48 @@
+#TODO: we could use the proxy for monitoring purposes
 services:
   # --- real first node (behind proxy) ---
-  rethink1_real:
-    image: rethinkdb-local:raft-debug
-    container_name: rethink1_real
+  rethink1:
+    image: rethinkdb:latest
+    container_name: rethink1
      # spit data to /data/node1
      # tells everyone else that its chill that I am telling you the wrong address
     command: >
-      --bind all
+      rethinkdb --bind all
       --directory /data/node1
-      --canonical-address rethink_proxy:29015
     volumes:
       - ./rethinkdb_data:/data # mount the data in /data/node1 back to local fs
     ports:
+      - "28015:28015" # web UI forwarded
       - "8080:8080" # web UI forwarded
     networks:
       rnet:
         ipv4_address: 172.30.0.11
 
-  # --- MITM proxy ---
-  rethink_proxy:
-    build: ./mitm
-    container_name: rethink_proxy
-    environment:
-      - PROXY_HOST=rethink1_real
-      - PROXY_PORT=29015 # port the real node1 sits at
-      - RAFT_PORT=29015 # port we are pretending to be
-      - CLIENT_PORT=28015 # port we are pretending to be
-      - BLOCK=False
-
-    ports: # exposes ports
-      - "28015:28015" # expose proxy’s client communication port
-    networks:
-      rnet:
-        # give fixed IP
-        ipv4_address: 172.30.0.10
-
   # --- second node joins through proxy ---
   rethink2:
-    image: rethinkdb-local:raft-debug
+    image: rethinkdb:latest
     container_name: rethink2
-    command: >
-      --bind all 
-      --directory /data/node2 
-      --join rethink_proxy:29015
+    command: rethinkdb --bind all --directory /data/node2 --join rethink1:29015
     volumes:
       - ./rethinkdb_data:/data
     networks:
       rnet:
         ipv4_address: 172.30.0.12
     depends_on:
-      - rethink_proxy
+      - rethink1
 
   # --- third node joins through proxy ---
   rethink3:
-    image: rethinkdb-local:raft-debug
+    image: rethinkdb:latest
     container_name: rethink3
-    command: >
-      --bind all 
-      --directory /data/node3 
-      --join rethink_proxy:29015
+    command: rethinkdb --bind all --directory /data/node3 --join rethink1:29015
     volumes:
       - ./rethinkdb_data:/data
     networks:
       rnet:
         ipv4_address: 172.30.0.13
     depends_on:
-      - rethink_proxy
-  
-  # --- monitor --- note removed: tcp port 28015
-  packet_monitor:
-      image: nicolaka/netshoot
-      container_name: packet_monitor
-      command: >
-        tcpdump -i rethink_bridge -U -w /captures/all_traffic.pcap -v 
-        'tcp port 29015'
-      volumes:
-        - ./packet_captures:/captures
-      network_mode: host
-      # let it do whatever it wants 
-      privileged: true
-      cap_add:
-        - NET_ADMIN
-        - NET_RAW
+      - rethink1
 
 # configure docker bridge network
 networks:

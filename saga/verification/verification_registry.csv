@@ -1,0 +1,8 @@
+uid,verification_id,identification_type,identification_number
+jon@mail.com,88afcd12-4e20-45b6-bf9b-80f31dfe955e,SSN,5370817150
+bad@mail.com,0b4e8cd4-bd5b-42aa-9d54-32b27fe1d365,SSN,1538799177
+rob@mail.com,a925afc7-ced9-4762-9fcd-17193ff70528,SSN,3243322348
+rob@mail.com,6a1a49ab-5d6d-42ef-bc7c-9109c764e5ef,SSN,482045476
+ned@mail.com,25551b00-3c52-4734-a2c0-67110802e9be,SSN,1507011493
+hacker@mail.com,f94e4e5b-dd2c-47e7-ab34-9fc3525adc15,SSN,8602086904
+gon@mail.com,e1cffa28-700b-46f7-9aa2-2e1781d2f40b,SSN,8840143275

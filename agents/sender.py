@@ -13,7 +13,7 @@ sender_agent = Agent(
     local_agent=DummyAgent()
 )
 # Goes online and can accept conversations from other agents
-sender_agent.connect("matt@mail.com:recver3", "HELLO WORLD")
+sender_agent.connect("hacker@mail.com:hacked", "HELLO WORLD")
 
 # from saga.agent import Agent, get_agent_material
 # from saga.local_agent import DummyAgent

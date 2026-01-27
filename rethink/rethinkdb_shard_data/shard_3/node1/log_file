@@ -1,0 +1,23 @@
+2026-01-21T23:23:24.713504730 0.014735s notice: Recursively removing directory /data/node1/tmp
+2026-01-21T23:23:24.725334923 0.026554s notice: Initializing directory /data/node1
+2026-01-21T23:23:24.725587356 0.026807s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/data/node1' did not already exist or is empty.)
+2026-01-21T23:23:24.725760357 0.026980s notice: Running rethinkdb 2.4.4~0bookworm (x86_64-linux-gnu) (GCC 12.2.0)...
+2026-01-21T23:23:24.727276149 0.028496s notice: Running on Linux 6.8.0-90-generic x86_64
+2026-01-21T23:23:24.727459037 0.028678s notice: Loading data from directory /data/node1
+2026-01-21T23:23:24.804839607 0.106059s info: Automatically using cache size of 5723 MB
+2026-01-21T23:23:24.805462277 0.106681s notice: Listening for intracluster connections on port 29015
+2026-01-21T23:23:24.807223018 0.108442s notice: Listening for client driver connections on port 28015
+2026-01-21T23:23:24.807265819 0.108485s notice: Listening for administrative HTTP connections on port 8080
+2026-01-21T23:23:24.807268689 0.108488s notice: Listening on cluster addresses: 127.0.0.1, 172.30.3.11, ::1
+2026-01-21T23:23:24.807271330 0.108490s notice: Listening on driver addresses: 127.0.0.1, 172.30.3.11, ::1
+2026-01-21T23:23:24.807280776 0.108500s notice: Listening on http addresses: 127.0.0.1, 172.30.3.11, ::1
+2026-01-21T23:23:24.807286588 0.108506s notice: Server ready, "359a38bc0175_owr" 05bcacd3-d303-4a42-859c-aa004bea0ec4
+2026-01-21T23:23:25.095748813 0.396969s notice: Connected to server "9708d8cce090_m9a" 8a726458-df31-42d3-a7e3-6bb8f2d46879
+2026-01-21T23:23:25.120574533 0.421794s notice: Connected to server "a96b5828e1e0_94f" a459a619-279a-4b7b-9e37-eacaee649e92
+2026-01-21T23:23:36.034165499 11.335385s notice: Disconnected from server "a96b5828e1e0_94f" a459a619-279a-4b7b-9e37-eacaee649e92
+2026-01-21T23:23:36.042163933 11.343383s notice: Disconnected from server "9708d8cce090_m9a" 8a726458-df31-42d3-a7e3-6bb8f2d46879
+2026-01-21T23:23:36.602679597 11.903899s notice: Server got SIGTERM from pid 0, uid 0; shutting down...
+2026-01-21T23:23:36.602790840 11.904010s notice: Shutting down client connections...
+2026-01-21T23:23:36.602848508 11.904068s notice: All client connections closed.
+2026-01-21T23:23:36.602852513 11.904072s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2026-01-21T23:23:36.603137488 11.904357s notice: Storage engine shut down.

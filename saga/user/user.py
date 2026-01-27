@@ -36,6 +36,8 @@ state = {}
 state['uid'] = None
 state['keys'] = {}
 state['agents'] = {}
+# TODO: add provider address as state
+# TODO: remove references to the SAGA Provider config
 
 monitor = Monitor()
 
@@ -73,6 +75,10 @@ def register(email: str=None, password: str=None):
     sc.save_x509_certificate(saga.config.USER_WORKDIR+"/keys/"+email, user_cert)
 
     monitor.stop("user:user_register")
+    
+    # TODO: ask router for which Provider to use based on [email]
+    # TODO: save the correct provider as state
+    
     logger.log("OVERHEAD", f"user:user_register: {monitor.elapsed('user:user_register')}")
     response = requests.post(f"{saga.config.PROVIDER_CONFIG.get('endpoint')}/register", json={
         'uid': email, # uid
@@ -123,6 +129,10 @@ def login(email: str=None, password: str=None):
     email = input("Enter email: ") if email is None else email
     password = input("Enter password: ") if password is None else password
 
+    # TODO: ask router for which Provider to use based on [email]
+    # TODO: save the correct provider as state
+    
+    
     response = requests.post(f"{saga.config.PROVIDER_CONFIG.get('endpoint')}/login", json={'uid': email, 'password': password}, verify=saga.config.CA_CERT_PATH, cert=(
         saga.config.USER_WORKDIR+"/keys/"+email+".crt", saga.config.USER_WORKDIR+"/keys/"+email+".key"
     )) 
@@ -289,6 +299,7 @@ def register_agent(name=None, device=None,
 
     monitor.stop("user:agent_register")
 
+    # TODO: use the state stored provider location
     response = requests.post(f"{saga.config.PROVIDER_CONFIG.get('endpoint')}/register_agent", json={
         'uid': state['uid'], # The user's uid
         'jwt': provider_tokens[-1], # Provider's JWT

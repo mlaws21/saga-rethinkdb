@@ -1,6 +1,8 @@
 """
     Provider for SAGA agents that handles user registration, authentication, and certificate management.
 """
+import hashlib
+import requests
 import ssl
 from flask import Flask, request, jsonify
 from flask_bcrypt import Bcrypt
@@ -40,7 +42,9 @@ class Provider:
             db_name: str="saga",
             num_replicas: int=3,
             num_shards: int=1,
-            jwt_secret: str="supersecretkey"
+            jwt_secret: str="supersecretkey",
+            verification_host: str="localhost",
+            verification_port: int=9000
         ):
         """
         Initializes the Provider with RethinkDB, JWT, and OAuth configuration.
@@ -134,6 +138,9 @@ class Provider:
         self.bcrypt = Bcrypt(self.app)
 
         self.active_jwt_tokens = []
+        
+        self.verification_host = verification_host
+        self.verification_port = verification_port
 
         # Load CA object for certificate signing:
         self.CA = get_SAGA_CA()
@@ -196,6 +203,25 @@ class Provider:
             except:
                 pass # user doesnt exist
             
+            
+            
+            try:
+                verification_response = requests.post(
+                    f"http://{self.verification_host}:{self.verification_port}/verify",
+                    json={"uid": uid}
+                )
+                
+            except:
+                logger.error(f"Failed to reach verification server.")
+                return jsonify({"message": "Failed to reach verification server."}), 401
+                
+            verification_response = verification_response.json()
+            
+            if verification_response["status"] != "SUCCESS":
+                logger.error(f"Invalid user verification [{verification_response['status']}].")
+                return jsonify({"message": f"Invalid user verification [{verification_response['status']}]"}), 401
+                
+
 
             # Store password hash and identity key in the database.
             hashed_pw = self.bcrypt.generate_password_hash(password).decode("utf-8")
@@ -213,6 +239,7 @@ class Provider:
                 "uid": uid,
                 "password": hashed_pw,
                 "crt_u": crt_u_bytes,
+                "verification_id": verification_response["verification_id"],
                 "auth_tokens": []
             }).run(self.rethink_conn)
             
@@ -436,7 +463,6 @@ class Provider:
             otk_sigs = application.get("otk_sigs")
             otk_sigs_bytes = [base64.b64decode(sig) for sig in otk_sigs]
             
-            logger.log("DEBUG", otks_bytes)
             # Verify the signatures of the one-time keys using the user's public signing key:
             for i, otk in enumerate(otks_bytes):
                 try:
@@ -699,13 +725,6 @@ class Provider:
             response.pop("contact_rulebook", None)
             response.pop("id", None)
             response.pop("counter", None)
-
-
-            logger.log("DEBUG", pprint.pformat(response))
-            logger.log("DEBUG", type(response['one_time_keys'][0]))
-            
-            # logger.log("DEBUG", pprint.pformat(b64(response['one_time_keys'][0])))
-            
 
             # Stop stopwatch:
             self.monitor.stop("provider:access")

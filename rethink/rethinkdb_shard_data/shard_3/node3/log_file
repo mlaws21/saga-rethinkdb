@@ -1,0 +1,24 @@
+2026-01-21T23:23:25.009417833 0.012300s notice: Recursively removing directory /data/node3/tmp
+2026-01-21T23:23:25.019344347 0.022224s notice: Initializing directory /data/node3
+2026-01-21T23:23:25.019640163 0.022520s notice: Running rethinkdb 2.4.4~0bookworm (x86_64-linux-gnu) (GCC 12.2.0)...
+2026-01-21T23:23:25.023749419 0.026629s notice: Running on Linux 6.8.0-90-generic x86_64
+2026-01-21T23:23:25.023871629 0.026751s notice: Loading data from directory /data/node3
+2026-01-21T23:23:25.109980301 0.112860s info: Automatically using cache size of 5653 MB
+2026-01-21T23:23:25.111495242 0.114375s notice: Listening for intracluster connections on port 29015
+2026-01-21T23:23:25.111985675 0.114865s info: Attempting connection to 1 peer...
+2026-01-21T23:23:25.114933295 0.117813s info: Rejected a connection from server a459a619-279a-4b7b-9e37-eacaee649e92 since one is open already.
+2026-01-21T23:23:25.116086538 0.118966s notice: Connected to server "359a38bc0175_owr" 05bcacd3-d303-4a42-859c-aa004bea0ec4
+2026-01-21T23:23:25.120993362 0.123873s notice: Listening for client driver connections on port 28015
+2026-01-21T23:23:25.121134873 0.124014s notice: Listening for administrative HTTP connections on port 8080
+2026-01-21T23:23:25.121144854 0.124024s notice: Listening on cluster addresses: 127.0.0.1, 172.30.3.13, ::1
+2026-01-21T23:23:25.121153548 0.124033s notice: Listening on driver addresses: 127.0.0.1, 172.30.3.13, ::1
+2026-01-21T23:23:25.121162037 0.124041s notice: Listening on http addresses: 127.0.0.1, 172.30.3.13, ::1
+2026-01-21T23:23:25.121194478 0.124074s notice: Server ready, "a96b5828e1e0_94f" a459a619-279a-4b7b-9e37-eacaee649e92
+2026-01-21T23:23:25.123314212 0.126195s notice: Connected to server "9708d8cce090_m9a" 8a726458-df31-42d3-a7e3-6bb8f2d46879
+2026-01-21T23:23:36.031559210 11.034438s notice: Server got SIGTERM from pid 0, uid 0; shutting down...
+2026-01-21T23:23:36.031644559 11.034524s notice: Shutting down client connections...
+2026-01-21T23:23:36.032712308 11.035592s notice: All client connections closed.
+2026-01-21T23:23:36.032721310 11.035600s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2026-01-21T23:23:36.033112288 11.035991s notice: Storage engine shut down.
+2026-01-21T23:23:36.034178472 11.037058s notice: Disconnected from server "9708d8cce090_m9a" 8a726458-df31-42d3-a7e3-6bb8f2d46879
+2026-01-21T23:23:36.034717720 11.037597s notice: Disconnected from server "359a38bc0175_owr" 05bcacd3-d303-4a42-859c-aa004bea0ec4

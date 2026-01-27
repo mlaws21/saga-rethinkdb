@@ -3,7 +3,7 @@ from saga.local_agent import DummyAgent
 
 
 # Gather required material
-agent_workdir = "/home/mlaws21/saga-rethinkdb/saga/user/matt@mail.com:recver3/"
+agent_workdir = "/home/mlaws21/saga-rethinkdb/saga/user/hacker@mail.com:hacked/"
 agent_material = get_agent_material(agent_workdir)
 
 # Create agent instance 

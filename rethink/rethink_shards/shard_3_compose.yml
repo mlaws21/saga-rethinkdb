@@ -1,0 +1,48 @@
+services:
+  rethink3_1:
+    image: rethinkdb:latest
+    container_name: rethink3_1
+    command: >
+      rethinkdb --bind all
+      --directory /data/node1
+    volumes:
+      - ../rethinkdb_shard_data/shard_3:/data
+    ports:
+      - "60315:28015"
+      - "60380:8080"
+    networks:
+      rnet_3:
+        ipv4_address: 172.30.3.11
+
+  rethink3_2:
+    image: rethinkdb:latest
+    container_name: rethink3_2
+    command: rethinkdb --bind all --directory /data/node2 --join rethink3_1:29015
+    volumes:
+      - ../rethinkdb_shard_data/shard_3:/data
+    networks:
+      rnet_3:
+        ipv4_address: 172.30.3.12
+    depends_on:
+      - rethink3_1
+
+  rethink3_3:
+    image: rethinkdb:latest
+    container_name: rethink3_3
+    command: rethinkdb --bind all --directory /data/node3 --join rethink3_1:29015
+    volumes:
+      - ../rethinkdb_shard_data/shard_3:/data
+    networks:
+      rnet_3:
+        ipv4_address: 172.30.3.13
+    depends_on:
+      - rethink3_1
+
+networks:
+  rnet_3:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: "rb_3"
+    ipam:
+      config:
+        - subnet: 172.30.3.0/24

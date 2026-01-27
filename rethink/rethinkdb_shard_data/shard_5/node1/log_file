@@ -1,0 +1,26 @@
+2026-01-21T23:23:24.532174410 0.007932s notice: Recursively removing directory /data/node1/tmp
+2026-01-21T23:23:24.537410118 0.013158s notice: Initializing directory /data/node1
+2026-01-21T23:23:24.537497090 0.013245s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/data/node1' did not already exist or is empty.)
+2026-01-21T23:23:24.537539227 0.013287s notice: Running rethinkdb 2.4.4~0bookworm (x86_64-linux-gnu) (GCC 12.2.0)...
+2026-01-21T23:23:24.539587302 0.015336s notice: Running on Linux 6.8.0-90-generic x86_64
+2026-01-21T23:23:24.540330554 0.016079s notice: Loading data from directory /data/node1
+2026-01-21T23:23:24.603598053 0.079346s info: Automatically using cache size of 5794 MB
+2026-01-21T23:23:24.604943418 0.080691s notice: Listening for intracluster connections on port 29015
+2026-01-21T23:23:24.606842044 0.082590s notice: Listening for client driver connections on port 28015
+2026-01-21T23:23:24.606895886 0.082644s notice: Listening for administrative HTTP connections on port 8080
+2026-01-21T23:23:24.606900108 0.082648s notice: Listening on cluster addresses: 127.0.0.1, 172.30.5.11, ::1
+2026-01-21T23:23:24.606903612 0.082651s notice: Listening on driver addresses: 127.0.0.1, 172.30.5.11, ::1
+2026-01-21T23:23:24.606917181 0.082665s notice: Listening on http addresses: 127.0.0.1, 172.30.5.11, ::1
+2026-01-21T23:23:24.606925228 0.082673s notice: Server ready, "723e1910da86_1ki" 53868486-048b-406e-87af-500f2337c02d
+2026-01-21T23:23:24.889943788 0.365692s notice: Connected to server "eb5949575f38_pqc" 0132bb01-3da0-4826-bbd3-bfde52ea811c
+2026-01-21T23:23:24.955322296 0.431070s notice: Connected to server "bf25a746bd38_v12" 4c34b2a7-21b6-4939-a9aa-f2e54e94c307
+2026-01-21T23:23:36.038844765 11.514593s notice: Disconnected from server "eb5949575f38_pqc" 0132bb01-3da0-4826-bbd3-bfde52ea811c
+2026-01-21T23:23:36.039037130 11.514785s notice: Disconnected from server "bf25a746bd38_v12" 4c34b2a7-21b6-4939-a9aa-f2e54e94c307
+2026-01-21T23:23:36.089832631 11.565580s info: Rejected a connection from server 53868486-048b-406e-87af-500f2337c02d since one is open already.
+2026-01-21T23:23:36.090114312 11.565862s info: Rejected a connection from server 53868486-048b-406e-87af-500f2337c02d since one is open already.
+2026-01-21T23:23:36.277624411 11.753372s info: Rejected a connection from server 53868486-048b-406e-87af-500f2337c02d since one is open already.
+2026-01-21T23:23:36.551501047 12.027249s notice: Server got SIGTERM from pid 0, uid 0; shutting down...
+2026-01-21T23:23:36.551664239 12.027412s notice: Shutting down client connections...
+2026-01-21T23:23:36.551805030 12.027553s notice: All client connections closed.
+2026-01-21T23:23:36.551816873 12.027565s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2026-01-21T23:23:36.552522320 12.028270s notice: Storage engine shut down.
